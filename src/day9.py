@@ -19,14 +19,14 @@ def two_difference(target: int, nums: List[int]) -> Optional[Tuple[int, int]]:
     tuple (0, j) where nums[j] == target. Otherwise, returns None.
     """
 
-    differences = {target + nums[i - 1]: i for i in range(1, len(nums) + 1)}
+    sums = {target + nums[i - 1]: i for i in range(1, len(nums) + 1)}
 
-    if target not in differences:
-        differences[target] = 0
+    if target not in sums:
+        sums[target] = 0
 
     for j in range(len(nums)):
-        if nums[j] in differences:
-            return differences[nums[j]], j
+        if nums[j] in sums:
+            return sums[nums[j]], j
 
     return None
 
