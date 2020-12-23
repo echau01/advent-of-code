@@ -21,9 +21,9 @@ def run(instructions: List[str]) -> Tuple[bool, int]:
     """
     Run the assembly program with the given instructions. Returns a tuple
     containing a bool and an int.
-        - The bool is `True` if the program finishes execution without
-          infinitely looping; `False` otherwise.
-        - The int is the value of `acc` when the program finishes running
+        - The bool is True if the program finishes execution without
+          infinitely looping; False otherwise.
+        - The int is the value of acc when the program finishes running
           or right before the same instruction is executed a second time.
     """
 

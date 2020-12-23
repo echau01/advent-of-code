@@ -33,7 +33,7 @@ def num_bags(bag_type: str) -> int:
     result = 1
 
     for key, value in rules[bag_type].items():
-        # We add 1 to num_bags(key) so that we count the actual bag with type `key`.
+        # We add 1 to num_bags(key) so that we count the actual bag with type key.
         result += value * (num_bags(key) + 1)
 
     return result - 1
