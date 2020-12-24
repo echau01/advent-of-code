@@ -28,12 +28,39 @@ def count_valid_arrangements(ratings: List[int]) -> int:
             while next_included_idx in exclude:
                 next_included_idx += 1
 
-            if 1 <= _ratings[next_included_idx] - _ratings[previous_included_idx] <= 3:
-                exclude.add(starting)
-                result += helper(_ratings, exclude, next_included_idx)
-                exclude.remove(starting)
+            if _ratings[next_included_idx] - 3 <= _ratings[starting] <= _ratings[previous_included_idx] + 3:
+                middle_indices = []
 
-            result += helper(_ratings, exclude, next_included_idx)
+                curr = next_included_idx
+                while _ratings[curr] - _ratings[starting] <= 3:
+                    if curr not in exclude:
+                        middle_indices.append(curr)
+
+                    curr += 1
+
+                highest_valid_idx = middle_indices[-1]
+                middle_indices = middle_indices[:-1]
+
+                if highest_valid_idx != next_included_idx:
+                    for idx in middle_indices:
+                        exclude.add(idx)
+
+                    result += helper(_ratings, exclude, highest_valid_idx) << len(middle_indices)
+
+                    for idx in middle_indices:
+                        exclude.remove(idx)
+
+                    exclude.add(highest_valid_idx)
+                    result += helper(_ratings, exclude, next_included_idx)
+                    exclude.remove(highest_valid_idx)
+                else:
+                    result += helper(_ratings, exclude, next_included_idx)
+
+                if 1 <= _ratings[next_included_idx] - _ratings[previous_included_idx] <= 3:
+                    exclude.add(starting)
+                    result += helper(_ratings, exclude, next_included_idx)
+                    exclude.remove(starting)
+
             return result
         else:
             return 1
