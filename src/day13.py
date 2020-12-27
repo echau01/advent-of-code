@@ -26,7 +26,7 @@ def lcm(a: int, b: int) -> int:
     #
     # gcd(a, b) * lcm(a, b)
     # = 2^[min(m_1,n_1) + max(m_1,n_1)] * 3^[min(m_2,n_2) + max(m_2,n_2)] * 5^[min(m_3,n_3) + max(m_3,n_3)] * ...
-    # = 2^(m_1 + n_1) * 3^(m_2 + n_2) * 5^(m_3 + n_3) + ... (because min(x,y) + max(x,y) = x+y for all x and y)
+    # = 2^(m_1 + n_1) * 3^(m_2 + n_2) * 5^(m_3 + n_3) * ... (because min(x,y) + max(x,y) = x+y for all x and y)
     # = ab
     # Hence lcm(a, b) = ab/gcd(a,b).
     return (a // gcd(a, b)) * b
