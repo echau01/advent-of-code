@@ -97,8 +97,7 @@ for bus_id, offset in buses_indices_map.items():
     # we want to maintain the property that result + buses_indices_map[b_k]
     # is a multiple of b_k for all 0 <= k < i.
     #
-    # Invariant 1 tells us that current_lcm = lcm(b_0, b_1, ..., b_(i-1)).
-    # Thus, the algorithm for restoring invariant 1 is as follows:
+    # The algorithm for restoring invariant 1 is as follows:
     #
     # 1. Check if result + offset is a multiple of bus_id. If it is, then we
     # are done, since result + buses_indices_map[b_k] is a multiple of b_k
@@ -127,6 +126,7 @@ for bus_id, offset in buses_indices_map.items():
     # value twice, we have an infinite loop. There are bus_id possible values
     # of (result + offset) % bus_id, so by the pigeonhole principle, we will have
     # seen one of those values more than once if the loop runs more than bus_id times.
+    # We can then break out of the loop.
 
     counter = 0
 
@@ -137,6 +137,9 @@ for bus_id, offset in buses_indices_map.items():
         if counter > bus_id:
             result = None
             break
+
+    if result is None:
+        break
 
     # Restore invariant 1 for iteration i+1.
     current_lcm = lcm(current_lcm, bus_id)
