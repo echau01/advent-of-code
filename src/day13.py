@@ -97,7 +97,7 @@ for bus_id, offset in buses_indices_map.items():
     # we want to maintain the property that result + buses_indices_map[b_k]
     # is a multiple of b_k for all 0 <= k < i.
     #
-    # The algorithm for restoring invariant 1 is as follows:
+    # The algorithm for restoring invariant 2 is as follows:
     #
     # 1. Check if result + offset is a multiple of bus_id. If it is, then we
     # are done, since result + buses_indices_map[b_k] is a multiple of b_k
@@ -106,8 +106,8 @@ for bus_id, offset in buses_indices_map.items():
     # Invariant 1 tells us that current_lcm = lcm(b_0, b_1, ..., b_(i-1)),
     # and invariant 2 tells us that result ≡ b_k - buses_indices_map[b_k] (mod b_k)
     # for 0 <= k < i. By the theorem above, the new value of result is the next smallest
-    # value that satisfies invariant 2. After updating result, we go back to step 1 to
-    # check if we are done.
+    # value that satisfies invariant 2 for 0 <= k < i. After updating result, we go back 
+    # to step 1 to check if we are done.
     #
     # This algorithm terminates assuming that there exists a value of result that
     # restores invariant 2 for iteration i+1. There might not be a solution, however.
