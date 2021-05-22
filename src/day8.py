@@ -1,20 +1,4 @@
-from typing import List, Tuple, Optional
-from os.path import isfile
-
-
-def read_file(path: str) -> Optional[List[str]]:
-    """
-    If the file with given path exists, returns a list of the lines in the
-    file. If the file does not exist, returns None.
-    """
-
-    if isfile(path):
-        with open(path, "r") as f:
-            contents = f.read().splitlines()
-
-        return contents
-
-    return None
+from typing import List, Tuple
 
 
 def run(instructions: List[str]) -> Tuple[bool, int]:
@@ -50,7 +34,8 @@ def run(instructions: List[str]) -> Tuple[bool, int]:
         return True, acc
 
 
-instructions = read_file("day8.txt")
+with open("day8.txt", "r") as f:
+    instructions = f.read().splitlines()
 
 # Part 1
 print(f"Part 1: acc={run(instructions)[1]}")

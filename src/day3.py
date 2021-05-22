@@ -1,5 +1,3 @@
-
-
 def num_trees(right: int, down: int) -> int:
     """
     Return the number of trees we would encounter if we travelled along the slope
