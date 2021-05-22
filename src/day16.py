@@ -23,7 +23,12 @@ while len(contents[i]) != 0:
     i += 1
 
 my_ticket_values = [int(num) for num in contents[i + 2].split(",")]
-nearby_tickets_start_idx = i + 5
+
+while contents[i] != "nearby tickets:":
+    i += 1
+
+# The list of nearby tickets starts on the line below the "nearby tickets:" heading
+nearby_tickets_start_idx = i + 1
 
 # Sum of all invalid ticket values in nearby tickets
 error_rate = 0
