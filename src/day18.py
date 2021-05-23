@@ -114,12 +114,17 @@ def evaluate(expr: str, equal_precedence: bool) -> int:
                 # Pop off all operators on the stack whose precedence is at least as high
                 # as the current token's precedence. Append these operators to result.
                 while not operator_stack.is_empty() and precedence <= precedence_map.get(operator_stack.peek(), 0):
-                    # By design, this preserves the left-to-right order of the operators.
+                    # Since we use a stack to store the operators, the operator at the top of the stack is
+                    # the most recently seen operator. The operands that the top operator acts upon must
+                    # be the most recently seen operands that are not yet associated with an operator in result.
+                    # Therefore, popping the top operator and appending it to result associates the top operator
+                    # with the correct operators.
                     result.append(operator_stack.pop())
 
                 operator_stack.push(token)
             elif token == ")":
-                # Append all operators to result
+                # A right parenthesis signifies the end of a subexpression. Thus, we will
+                # append all remaining operators in the subexpression to result.
                 while not operator_stack.is_empty() and operator_stack.peek() != "(":
                     result.append(operator_stack.pop())
 
